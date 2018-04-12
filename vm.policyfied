@@ -1,0 +1,7 @@
+<domain>
+  <policies>
+    <guest os="rhel-7"/>
+  </policies>
+  <name>centos7.0</name>
+  <uuid>9fee3a60-4746-45b5-b3db-8d9a70efb94d</uuid>
+</domain>
