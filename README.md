@@ -7,3 +7,6 @@ Idea:
 Dependencies:
 - Libvirt permits to influence how intermediate device tree nodes (i.e. busses)
   are created
+
+Guiding principles:
+- Needs to be living atop libvirtd
