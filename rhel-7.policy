@@ -1,6 +1,9 @@
 <policy selector='domain[policies/guest/@os="rhel-8"]'>
 <domain>
-  <!-- domain ? -->
+  <defaults>
+    <cdrom model="foobar" />
+    <bus type="scsi" />
+  </defaults>
   <memory unit='KiB'>2097152</memory>
   <features>
     <acpi/>
