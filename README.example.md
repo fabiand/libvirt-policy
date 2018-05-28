@@ -15,6 +15,8 @@ value, merge in a more or less partial domain xml definition.
 - How can we inject dynamic data (i.e. number of cores)?
 - Should a policy contain multiple snippets?
 - Should there be a way to force a policy to override existing domxml fields?
+- Today there is now way to specify values for implicitly created device nodes
+  or attributes - see the example further below.
 - …
 
 # Example
@@ -92,3 +94,63 @@ Fields specified in the domain xml should have a precedence over policy fields.
   </features>
 </domain>
 ```
+
+## Defaults for implicitly created device nodes
+
+A bg known gap with policies is, that they can not influence how fields of
+implicitly added default values and tags are.
+
+I.e. If you add an interface to the domain xml:
+
+```xml
+<domain>
+  <devices>
+    <interface …/>
+  </devices>
+</domain>
+```
+
+Then the following might happen:
+
+1. A controller is added
+2. The model attribute is set to `e1000` by default
+
+```xml
+<domain>
+  <devices>
+    <controller type='pci' …/> <!-- HERE -->
+    <interface model='e1000' …/> <!-- HERE -->
+  </devices>
+</domain>
+```
+
+However, with our policy we probably want to define
+
+1. The type of controller
+2. The model of the vNIC
+
+In order to permit this with policies, libvirt needs to provide an API to
+define the defaults for fields and tags which are automatically set during
+creation.
+
+I.e. like:
+
+```xml
+<domain>
+  <defaults>
+    <devices>
+      <controller type='pcie' />
+      <interface type='e1000e' />
+    </devices>
+  </defaults>
+
+  <devices>
+    <controller type='pcie' …/> <!-- HERE -->
+    <interface model='e1000e' …/> <!-- HERE -->
+  </devices>
+</domain>
+```
+
+In the example above the defaults would have told libvirt to set the `type` of
+the controller to `pcie`, and to choose `e1000e` as the default value for the
+automatically added `model` attribute on the `interface` tag.
