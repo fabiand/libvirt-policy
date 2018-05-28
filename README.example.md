@@ -117,10 +117,10 @@ I.e. If you add an interface to the domain xml:
 </domain>
 ```
 
-Then the following might happen:
+Then the following might be done by libvirt:
 
-1. A controller is added
-2. The model attribute is set to `e1000` by default
+1. A controller is added - `type` is the hard coded default
+2. The model attribute is set to `e1000` using a hard coded default
 
 ```xml
 <domain>
