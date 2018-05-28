@@ -19,6 +19,13 @@ value, merge in a more or less partial domain xml definition.
   or attributes - see the example further below.
 - …
 
+## Important aspects
+
+- The policy needs to be independent of the domain xml and code
+- The policy logic does not need to be in core libvirt
+- The policy snippets should have the same (or subset) scope of domain xml
+  to ease validation.
+
 # Example
 
 ## Policy
